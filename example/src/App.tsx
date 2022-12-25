@@ -7,7 +7,8 @@ export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    multiply(3, 17).then(setResult);
+    console.log('AFERİM');
   }, []);
 
   return (

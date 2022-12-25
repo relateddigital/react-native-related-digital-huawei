@@ -1,6 +1,6 @@
 {
   "name": "react-native-related-digital-huawei",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -39,7 +39,11 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "push",
+    "apns",
+    "fmc",
+    "related-digital"
   ],
   "repository": "https://github.com/relateddigital/react-native-related-digital-huawei",
   "author": "Related Digital <developer@relateddigital.com> (https://github.com/relateddigital)",
@@ -51,7 +55,11 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "dependencies": {
+    "invariant": "^2.2.4"
+  },
   "devDependencies": {
+    "@types/invariant": "^2.2.4",
     "@evilmartians/lefthook": "^1.2.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@react-native-community/eslint-config": "^3.0.2",
