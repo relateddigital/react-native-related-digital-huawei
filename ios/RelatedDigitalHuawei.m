@@ -11,10 +11,10 @@ RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
 RCT_EXTERN_METHOD(initialize:(NSString *) organizationId
                   withProfileId:(NSString *) profileId
                   withDataSource:(NSString *) dataSource
-                  withAskLocationPermissionAtStart: BOOL)
+                  withAskLocationPermissionAtStart: (BOOL) askLocationPermissionAtStart)
 
 
-RCT_EXTERN_METHOD(setIsInAppNotificationEnabled)
+//RCT_EXTERN_METHOD(setIsInAppNotificationEnabled: BOOL)
 
 
 
