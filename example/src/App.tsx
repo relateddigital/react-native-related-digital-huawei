@@ -1,39 +1,79 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-related-digital-huawei';
+import { Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import RelatedDigital from 'react-native-related-digital-huawei';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
 
-  React.useEffect(() => {
-    multiply(3, 17).then(setResult);
-    RelatedDigital.init(
-      '676D325830564761676D453D',
-      '356467332F6533766975593D',
-      'visistore',
-      true
-    );
-    console.log('AFERİM');
-  }, []);
+  const navigation = useNavigation()
+  useFocusEffect(
+    React.useCallback(() => {
+    }, [])
+  );
+
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <ScrollView
+      contentContainerStyle={styles.contentContainerStyles}
+      style={styles.container}>
+
+      <View style={styles.btnContainer}>
+        <Button
+          onPress={async () => {
+            await RelatedDigital.setEmail('ege@visi.com', true)
+          }}
+          title={'setEmail'}
+        />
+      </View>
+
+      <View style={styles.btnContainer}>
+        <Button
+          onPress={async () => {
+            await RelatedDigital.customEvent('PageView', {
+              'OM.pv': 'psd',
+              'OM.pp': '10.23'
+            })
+          }}
+          title={'customEvent'}
+        />
+      </View>
+
+
+      <View style={styles.btnContainer}>
+        <Button
+          onPress={() => navigation.navigate('Push Screen')}
+          title={"Push Screen"}
+        />
+      </View>
+      <Text>Push Screen</Text>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
+  container: {},
+  contentContainerStyles: {
+    width: Dimensions.get('window').width,
     justifyContent: 'center',
+    alignItems: 'stretch',
+    padding: 20,
   },
   box: {
     width: 60,
     height: 60,
     marginVertical: 20,
   },
+  heading: {
+    fontWeight: 'bold',
+    marginTop: 20
+  },
+  input: {
+    borderWidth: 1,
+    width: 250,
+    borderColor: 'black'
+  },
+  btnContainer: {
+    margin: 10
+  }
 });

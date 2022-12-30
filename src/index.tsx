@@ -1,62 +1,28 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
 
-const LINKING_ERROR =
-  `The package 'react-native-related-digital-huawei' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "-·You·have·run·'pod·install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo Go\n';
+type RelatedDigitalType = {
+  multiply(a: number, b: number): Promise<number>;
+  initialize(organizationId: string, profileId: string, dataSource: string, askLocationPermissionAtStart: boolean): void; //TODO: BU KALKABİLİR BELKİ
+  setIsInAppNotificationEnabled(isInAppNotificationEnabled: boolean): void;
+  setIsGeofenceEnabled(isGeofenceEnabled: boolean): void;
+  setAdvertisingIdentifier(advertisingIdentifier: string): void;
+  signUp(exVisitorId: string, properties: object): void;
+  login(exVisitorId: string, properties: object): void;
+  logout(): void;
+  customEvent(pageName: string, parameters: object): void;
+  setIsPushNotificationEnabled(isPushNotificationEnabled: boolean, appAlias: string, deliveredBadge: boolean): void;
+  setEmail(email: string, permission: boolean): void;
+  sendCampaignParameters(parameters: object): void;
+  setTwitterId(twitterId: string): void;
+  setFacebookId(facebookId: string): void;
+  setRelatedDigitalUserId(relatedDigitalUserId: string): void;
+  setNotificationLoginId(notificationLoginId: string): void;
+  setPhoneNumber(msisdn: string, permission: boolean): void;
+  setUserProperty(key: string, value: string): void;
+  removeUserProperty(key: string): void;
+};
 
-const RelatedDigitalHuawei = NativeModules.RelatedDigitalHuawei
-  ? NativeModules.RelatedDigitalHuawei
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+const { RelatedDigitalHuawei } = NativeModules;
 
-export function multiply(a: number, b: number): Promise<number> {
-  return RelatedDigitalHuawei.multiply(a, b);
-}
+export default RelatedDigitalHuawei as RelatedDigitalType;
 
-export default class RelatedDigital {
-  /**
-   * Initializes RelatedDigital.
-   * @param  {string} organizationId
-   * @param  {string} profileId
-   * @param  {string} dataSource
-   * @param  {boolean} askLocationPermissionAtStart
-   * @returns void
-   */
-
-  static init(
-    organizationId: string,
-    profileId: string,
-    dataSource: string,
-    askLocationPermissionAtStart: boolean
-  ): void {
-    //let a = organizationId + profileId + dataSource + askLocationPermissionAtStart;
-    //console.log(a);
-
-    console.log(organizationId);
-    console.log(profileId);
-    console.log(dataSource);
-    console.log(askLocationPermissionAtStart);
-
-    RelatedDigitalHuawei.initialize(
-      organizationId,
-      profileId,
-      dataSource,
-      askLocationPermissionAtStart
-    );
-
-    /*
-    if (!isNativeModuleLoaded(RelatedDigitalHuawei)) {
-      return;
-    }
-    RelatedDigitalHuawei.init(organizationId);
-    */
-  }
-}
